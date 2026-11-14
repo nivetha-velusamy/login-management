@@ -18,4 +18,5 @@ app.use('/api/sessions', require('./routes/sessions'));
 app.use('/api/network', require('./routes/network'));
 app.use((err, req, res, next) => { console.error(err); res.status(500).json({ message: 'Unexpected server error.' }); });
 const port = process.env.PORT || 5000;
-connectDB().then(() => app.listen(port, '0.0.0.0', () => console.log(`API listening on ${port}`))).catch(err => { console.error('Database connection failed:', err.message); process.exit(1); });
+app.listen(port, '0.0.0.0', () => console.log(`API listening on ${port}`));
+connectDB().catch(err => console.error('Database connection failed:', err.message));
